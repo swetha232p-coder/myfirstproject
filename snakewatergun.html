@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake Water Gun Game</title>
+</head>
+<body>
+  <script>
+    // Choices
+    const choices = ["S", "W", "G"];
+
+    // Computer randomly picks one
+    let computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+    // Ask user for input
+    let userChoice = prompt("Enter S for Snake, W for Water, or G for Gun:");
+
+    // Show both choices
+    alert("You chose: " + userChoice + "\nComputer chose: " + computerChoice);
+
+    // Decide winner
+    if (userChoice === computerChoice) {
+      alert("It's a draw!");
+    } else if (
+      (userChoice === "S" && computerChoice === "W") ||
+      (userChoice === "W" && computerChoice === "G") ||
+      (userChoice === "G" && computerChoice === "S")
+    ) {
+      alert("🎉 You win!");
+    } else {
+      alert("😢 You lose!");
+    }
+
+    // Ask if user wants to play again
+    let playAgain = confirm("Do you want to play again?");
+    if (playAgain) {
+      location.reload(); // reloads the page to restart
+    }
+  </script>
+</body>
+</html>

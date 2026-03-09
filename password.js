@@ -9,17 +9,19 @@ class Password {
 
   generate() {
     let password = "";
+
     // add one of each required type
     password += this.getRandom(this.lowercase);
     password += this.getRandom(this.uppercase);
     password += this.getRandom(this.special);
 
-    // fill the rest
+    // fill the rest with random characters
     let allChars = this.lowercase + this.uppercase + this.numbers + this.special;
     while (password.length < this.length) {
       password += this.getRandom(allChars);
     }
 
+    // shuffle so required chars aren’t always at the start
     return this.shuffle(password);
   }
 
@@ -35,9 +37,20 @@ class Password {
   }
 }
 
-// Function to connect with HTML
+// Function connected to HTML button
 function generatePassword() {
   let length = document.getElementById("length").value;
+
+  // enforce minimum and maximum length
+  if (length < 6) {
+    alert("Password length must be at least 6 characters!");
+    return;
+  }
+  if (length > 20) {
+    alert("Password length must not exceed 20 characters!");
+    return;
+  }
+
   let pwd = new Password(length);
   document.getElementById("output").textContent = pwd.generate();
 }
